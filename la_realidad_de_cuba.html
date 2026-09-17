@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Realidad de Cuba | Periodismo e historias sin censura</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cuba: {
+                            red: '#D32F2F',
+                            blue: '#002B7F',
+                            dark: '#0F172A',
+                            accent: '#E11D48',
+                            slate: '#1E293B'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS Styles for smooth transitions & map -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .article-title {
+            font-family: 'Merriweather', serif;
+        }
+        .ticker-wrap {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .ticker-move {
+            display: inline-block;
+            animation: ticker 35s linear infinite;
+        }
+        .ticker-move:hover {
+            animation-play-state: paused;
+        }
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(211, 47, 47, 0.5);
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900 dark:bg-slate-900 dark:text-gray-100 min-h-screen flex flex-col selection:bg-red-600 selection:text-white">
+
+    <!-- BREAKING NEWS TICKER -->
+    <div class="bg-red-700 text-white text-xs sm:text-sm font-medium py-2 px-4 flex items-center shadow-md relative z-50">
+        <span class="bg-slate-900 text-white font-bold px-2 py-1 rounded uppercase tracking-wider text-xs mr-3 flex items-center shrink-0">
+            <span class="w-2 h-2 rounded-full bg-red-500 animate-ping mr-1.5"></span>
+            ÚLTIMA HORA
+        </span>
+        <div class="ticker-wrap w-full overflow-hidden">
+            <div class="ticker-move flex items-center space-x-8">
+                <span class="inline-flex items-center"><i class="fa-solid fa-bolt text-yellow-300 mr-2"></i> SEN-La Habana: Reportan apagones de más de 16 horas en múltiples municipios del país.</span>
+                <span class="inline-flex items-center"><i class="fa-solid fa-chart-line text-red-300 mr-2"></i> Mercado Informal: El dólar alcanza nuevo máximo histórico frente al CUP.</span>
+                <span class="inline-flex items-center"><i class="fa-solid fa-users text-blue-300 mr-2"></i> Sociedad: Vecinos en Holguín impulsan comedor comunitario autogestionado.</span>
+                <span class="inline-flex items-center"><i class="fa-solid fa-camera text-green-300 mr-2"></i> Denuncias: Más de 40 reportes recibidos hoy en nuestro portal anónimo.</span>
+                <!-- Duplicated for infinite smooth loop -->
+                <span class="inline-flex items-center"><i class="fa-solid fa-bolt text-yellow-300 mr-2"></i> SEN-La Habana: Reportan apagones de más de 16 horas en múltiples municipios del país.</span>
+                <span class="inline-flex items-center"><i class="fa-solid fa-chart-line text-red-300 mr-2"></i> Mercado Informal: El dólar alcanza nuevo máximo histórico frente al CUP.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER & NAVIGATION -->
+    <header class="bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-slate-700 sticky top-0 z-40 transition-colors shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateTo('home')">
+                    <div class="bg-gradient-to-br from-red-600 to-blue-800 text-white p-2.5 rounded-lg shadow-md flex items-center justify-center">
+                        <i class="fa-solid fa-newspaper text-2xl sm:text-3xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-black tracking-tight text-slate-900 dark:text-white uppercase flex items-center gap-1.5">
+                            LA REALIDAD <span class="text-red-600">DE CUBA</span>
+                        </h1>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 font-medium tracking-wide">Periodismo e historias sin censura</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Search & Actions -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <div class="relative">
+                        <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Buscar noticias, lugares..." class="bg-gray-100 dark:bg-slate-700 text-gray-800 dark:text-gray-200 text-sm rounded-full pl-10 pr-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-2.5 text-gray-400"></i>
+                    </div>
+                    <!-- Dark/Light Theme Switch -->
+                    <button onclick="toggleDarkMode()" class="p-2.5 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-full transition-colors" title="Cambiar Tema">
+                        <i id="themeIcon" class="fa-solid fa-sun text-xl text-yellow-400"></i>
+                    </button>
+                    <!-- CTA Denuncia -->
+                    <button onclick="navigateTo('denuncias')" class="bg-red-600 hover:bg-red-700 text-white font-semibold text-xs uppercase tracking-wider px-4 py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all flex items-center space-x-2">
+                        <i class="fa-solid fa-shield-halved text-sm"></i>
+                        <span>Enviar Denuncia</span>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex md:hidden items-center space-x-2">
+                    <button onclick="toggleDarkMode()" class="p-2 text-gray-600 dark:text-gray-300">
+                        <i id="themeIconMobile" class="fa-solid fa-sun text-lg"></i>
+                    </button>
+                    <button onclick="toggleMobileMenu()" class="text-gray-700 dark:text-gray-200 p-2 text-2xl focus:outline-none">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex space-x-8 border-t border-gray-100 dark:border-slate-700/50 py-3 text-sm font-semibold text-gray-700 dark:text-gray-300">
+                <button onclick="navigateTo('home')" class="nav-btn hover:text-red-600 dark:hover:text-red-400 transition-colors active-nav" data-target="home">Inicio</button>
+                <button onclick="navigateTo('noticias')" class="nav-btn hover:text-red-600 dark:hover:text-red-400 transition-colors" data-target="noticias">Noticias</button>
+                <button onclick="navigateTo('denuncias')" class="nav-btn hover:text-red-600 dark:hover:text-red-400 transition-colors flex items-center gap-1.5" data-target="denuncias">
+                    Testimonios y Denuncias <span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold animate-pulse">EN VIVO</span>
+                </button>
+                <button onclick="navigateTo('mapa')" class="nav-btn hover:text-red-600 dark:hover:text-red-400 transition-colors" data-target="mapa">Mapa de la Situación</button>
+                <button onclick="navigateTo('galeria')" class="nav-btn hover:text-red-600 dark:hover:text-red-400 transition-colors" data-target="galeria">Galería Multimedia</button>
+                <button onclick="navigateTo('nosotros')" class="nav-btn hover:text-red-600 dark:hover:text-red-400 transition-colors" data-target="nosotros">Sobre Nosotros</button>
+            </nav>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-slate-700 px-4 pt-2 pb-4 space-y-3">
+            <div class="relative my-2">
+                <input type="text" oninput="handleSearch(this.value)" placeholder="Buscar en la web..." class="w-full bg-gray-100 dark:bg-slate-700 text-gray-800 dark:text-gray-200 text-sm rounded-lg pl-9 pr-4 py-2">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-gray-400"></i>
+            </div>
+            <a href="#" onclick="navigateTo('home'); toggleMobileMenu()" class="block py-2 text-gray-800 dark:text-gray-200 font-medium border-b border-gray-100 dark:border-slate-700">Inicio</a>
+            <a href="#" onclick="navigateTo('noticias'); toggleMobileMenu()" class="block py-2 text-gray-800 dark:text-gray-200 font-medium border-b border-gray-100 dark:border-slate-700">Noticias</a>
+            <a href="#" onclick="navigateTo('denuncias'); toggleMobileMenu()" class="block py-2 text-gray-800 dark:text-gray-200 font-medium border-b border-gray-100 dark:border-slate-700">Testimonios y Denuncias</a>
+            <a href="#" onclick="navigateTo('mapa'); toggleMobileMenu()" class="block py-2 text-gray-800 dark:text-gray-200 font-medium border-b border-gray-100 dark:border-slate-700">Mapa Interactivo</a>
+            <a href="#" onclick="navigateTo('galeria'); toggleMobileMenu()" class="block py-2 text-gray-800 dark:text-gray-200 font-medium border-b border-gray-100 dark:border-slate-700">Galería Multimedia</a>
+            <a href="#" onclick="navigateTo('nosotros'); toggleMobileMenu()" class="block py-2 text-gray-800 dark:text-gray-200 font-medium">Sobre Nosotros</a>
+            <button onclick="navigateTo('denuncias'); toggleMobileMenu()" class="w-full bg-red-600 text-white font-bold py-2.5 rounded-lg shadow mt-2 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Enviar Denuncia Anónima</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT WRAPPER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- ================= PAGE: HOME / INICIO ================= -->
+        <section id="page-home" class="page-section space-y-10">
+
+            <!-- Hero Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Featured Main Headline (Large) -->
+                <div class="lg:col-span-8 group cursor-pointer" onclick="openArticleModal(1)">
+                    <div class="relative overflow-hidden rounded-2xl shadow-xl h-96 md:h-[480px]">
+                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80" alt="La Habana al atardecer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent"></div>
+                        <div class="absolute top-4 left-4 flex gap-2">
+                            <span class="bg-red-600 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow">
+                                Reportaje Especial
+                            </span>
+                            <span class="bg-slate-900/80 backdrop-blur-md text-gray-200 text-xs font-medium px-3 py-1 rounded-full border border-gray-700">
+                                <i class="fa-regular fa-clock mr-1"></i> 6 min de lectura
+                            </span>
+                        </div>
+                        <div class="absolute bottom-0 p-6 md:p-8 text-white space-y-3">
+                            <span class="text-xs text-red-400 font-semibold tracking-wider uppercase">ENERGÍA & SOCIEDAD</span>
+                            <h2 class="text-2xl md:text-4xl font-bold article-title leading-tight hover:text-red-400 transition-colors">
+                                La parálisis del SEN: Millones de familias cubanas enfrentan jornadas a oscuras y sin alimentos
+                            </h2>
+                            <p class="text-gray-300 text-sm md:text-base line-clamp-2 font-light">
+                                Un recorrido exhaustivo por la crisis electroenergética, el colapso de la cadena de frío y el testimonio directo de ciudadanos en La Habana, Camagüey y Guantánamo.
+                            </p>
+                            <div class="flex items-center space-x-4 text-xs text-gray-400 pt-2">
+                                <span><i class="fa-regular fa-calendar mr-1"></i> 16 Sep 2026</span>
+                                <span><i class="fa-solid fa-user-shield mr-1"></i> Redacción Periodística</span>
+                                <span><i class="fa-regular fa-comment mr-1"></i> 84 Comentarios</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Side Top Stories -->
+                <div class="lg:col-span-4 flex flex-col justify-between space-y-4">
+                    <div class="border-b-2 border-red-600 pb-2 flex items-center justify-between">
+                        <h3 class="font-bold text-lg text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
+                            <i class="fa-solid fa-fire text-red-500"></i> Tendencias
+                        </h3>
+                        <span class="text-xs text-gray-500">Actualizado hace 15m</span>
+                    </div>
+
+                    <!-- Side Story 1 -->
+                    <div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow border border-gray-100 dark:border-slate-700 hover:border-red-500 transition-all cursor-pointer flex space-x-4" onclick="openArticleModal(2)">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=300&q=80" class="w-24 h-24 rounded-lg object-cover flex-shrink-0" alt="Mercado">
+                        <div class="flex flex-col justify-between">
+                            <div>
+                                <span class="text-[10px] font-bold text-red-500 uppercase">Economía</span>
+                                <h4 class="font-bold text-sm text-slate-900 dark:text-white line-clamp-2 hover:text-red-500 transition-colors">
+                                    Aumento incesante de la canasta básica en el mercado informal
+                                </h4>
+                            </div>
+                            <span class="text-xs text-gray-400"><i class="fa-regular fa-clock mr-1"></i> Hace 2 horas</span>
+                        </div>
+                    </div>
+
+                    <!-- Side Story 2 -->
+                    <div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow border border-gray-100 dark:border-slate-700 hover:border-red-500 transition-all cursor-pointer flex space-x-4" onclick="openArticleModal(3)">
+                        <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=300&q=80" class="w-24 h-24 rounded-lg object-cover flex-shrink-0" alt="Transporte">
+                        <div class="flex flex-col justify-between">
+                            <div>
+                                <span class="text-[10px] font-bold text-blue-500 uppercase">Transporte</span>
+                                <h4 class="font-bold text-sm text-slate-900 dark:text-white line-clamp-2 hover:text-red-500 transition-colors">
+                                    Escasez extrema de combustible reduce el transporte público al mínimo
+                                </h4>
+                            </div>
+                            <span class="text-xs text-gray-400"><i class="fa-regular fa-clock mr-1"></i> Hace 4 horas</span>
+                        </div>
+                    </div>
+
+                    <!-- Side Story 3 -->
+                    <div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow border border-gray-100 dark:border-slate-700 hover:border-red-500 transition-all cursor-pointer flex space-x-4" onclick="openArticleModal(4)">
+                        <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=300&q=80" class="w-24 h-24 rounded-lg object-cover flex-shrink-0" alt="Comunidad">
+                        <div class="flex flex-col justify-between">
+                            <div>
+                                <span class="text-[10px] font-bold text-emerald-500 uppercase">Comunidad</span>
+                                <h4 class="font-bold text-sm text-slate-900 dark:text-white line-clamp-2 hover:text-red-500 transition-colors">
+                                    Redes solidarias entre vecinos suplen falencias de asistencia en provincias
+                                </h4>
+                            </div>
+                            <span class="text-xs text-gray-400"><i class="fa-regular fa-clock mr-1"></i> Hace 5 horas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LIVE CITIZEN REPORTS BANNER -->
+            <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-red-950 rounded-2xl p-6 text-white shadow-xl border border-red-900/30">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 bg-red-500 rounded-full animate-ping"></span>
+                            <h3 class="text-xl font-bold uppercase tracking-wide">Denuncias Recientes de la Comunidad</h3>
+                        </div>
+                        <p class="text-gray-400 text-sm">Reportes verificados y enviados directamente por ciudadanos en la isla.</p>
+                    </div>
+                    <button onclick="navigateTo('denuncias')" class="bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-lg shadow transition-all self-start md:self-auto flex items-center gap-2">
+                        <i class="fa-solid fa-plus-circle"></i>
+                        <span>Publicar Tu Reporte</span>
+                    </button>
+                </div>
+
+                <!-- Horizontal Scrollable Feed -->
+                <div id="homeCitizenFeed" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- Dynamic Citizen Cards Rendered Here -->
+                </div>
+            </div>
+
+            <!-- CATEGORY FILTER & ARTICLES GRID -->
+            <div>
+                <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-gray-200 dark:border-slate-700 pb-4 mb-6 gap-4">
+                    <h3 class="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">
+                        Explorar Noticia por Categoría
+                    </h3>
+                    <div id="categoryFilterButtons" class="flex flex-wrap gap-2">
+                        <button onclick="filterNews('all')" class="cat-btn bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-lg shadow">Todas</button>
+                        <button onclick="filterNews('Sociedad')" class="cat-btn bg-gray-200 dark:bg-slate-800 hover:bg-gray-300 dark:hover:bg-slate-700 text-xs font-bold px-4 py-2 rounded-lg">Sociedad</button>
+                        <button onclick="filterNews('Economía')" class="cat-btn bg-gray-200 dark:bg-slate-800 hover:bg-gray-300 dark:hover:bg-slate-700 text-xs font-bold px-4 py-2 rounded-lg">Economía</button>
+                        <button onclick="filterNews('Energía')" class="cat-btn bg-gray-200 dark:bg-slate-800 hover:bg-gray-300 dark:hover:bg-slate-700 text-xs font-bold px-4 py-2 rounded-lg">Energía</button>
+                        <button onclick="filterNews('Historias')" class="cat-btn bg-gray-200 dark:bg-slate-800 hover:bg-gray-300 dark:hover:bg-slate-700 text-xs font-bold px-4 py-2 rounded-lg">Historias de Vida</button>
+                        <button onclick="filterNews('Opinión')" class="cat-btn bg-gray-200 dark:bg-slate-800 hover:bg-gray-300 dark:hover:bg-slate-700 text-xs font-bold px-4 py-2 rounded-lg">Opinión</button>
+                    </div>
+                </div>
+
+                <!-- Grid of Articles -->
+                <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Dynamic News Cards Injection -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE: NOTICIAS COMPLETE LIST ================= -->
+        <section id="page-noticias" class="page-section hidden space-y-6">
+            <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-gray-100 dark:border-slate-700">
+                <h2 class="text-3xl font-black text-slate-900 dark:text-white uppercase mb-2">Archivo General de Noticias</h2>
+                <p class="text-gray-500 dark:text-gray-400 text-sm">Todas las publicaciones ordenadas cronológicamente con verificación periodística independiente.</p>
+            </div>
+            <div id="allNewsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Injected via JavaScript -->
+            </div>
+        </section>
+
+        <!-- ================= PAGE: DENUNCIAS / CITIZEN REPORTING ================= -->
+        <section id="page-denuncias" class="page-section hidden space-y-8">
+            <!-- Header Info Box -->
+            <div class="bg-slate-900 text-white rounded-2xl p-6 md:p-8 shadow-xl relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl font-black">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <div class="relative z-10 max-w-3xl space-y-3">
+                    <span class="bg-red-600 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                        Seguridad & Anonimato Garantizado
+                    </span>
+                    <h2 class="text-2xl md:text-4xl font-bold">Portal de Denuncia Ciudadana Directa</h2>
+                    <p class="text-gray-300 text-sm md:text-base">
+                        Tu voz es fundamental para mostrar lo que ocurre día a día. Tu envío está protegido: no registramos la dirección IP ni datos personales. Puedes aportar imágenes, ubicación y detalles.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Setup Warning Banner (only visible if backend not yet configured) -->
+            <div id="setupWarningBanner" class="hidden bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-400 dark:border-yellow-700 text-yellow-800 dark:text-yellow-200 rounded-xl p-4 text-sm flex items-start gap-3">
+                <i class="fa-solid fa-triangle-exclamation text-lg mt-0.5"></i>
+                <div>
+                    <strong>Backend no configurado todavía.</strong> El formulario funciona en modo demostración (no se envía ningún correo ni se guarda nada). Edita la constante <code>DENUNCIAS_ENDPOINT</code> al inicio del script con la URL de tu Google Apps Script para activar el envío real. Revisa las instrucciones que te compartió Claude.
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Submission Form Column -->
+                <div class="lg:col-span-5 bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg border border-gray-100 dark:border-slate-700">
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-pen-to-square text-red-600"></i> Enviar Nueva Denuncia
+                    </h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 -mt-2 mb-2">
+                        <i class="fa-solid fa-clock-rotate-left mr-1"></i> Tu denuncia será revisada por nuestro equipo antes de publicarse en el muro público.
+                    </p>
+                    
+                    <form id="denunciaForm" name="denunciaForm" action="" method="POST" target="denunciaHiddenFrame" onsubmit="handleDenunciaSubmit(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300 mb-1">Título o Breve Resumen *</label>
+                            <input type="text" id="denunciaTitle" name="title" required placeholder="Ej: Apagón de 18 horas en Reparto Sevilla" class="w-full bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300 mb-1">Provincia / Ciudad *</label>
+                                <select id="denunciaLocation" name="location" required class="w-full bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500">
+                                    <option value="">Seleccionar...</option>
+                                    <option value="La Habana">La Habana</option>
+                                    <option value="Santiago de Cuba">Santiago de Cuba</option>
+                                    <option value="Holguín">Holguín</option>
+                                    <option value="Camagüey">Camagüey</option>
+                                    <option value="Villa Clara">Villa Clara</option>
+                                    <option value="Guantánamo">Guantánamo</option>
+                                    <option value="Matanzas">Matanzas</option>
+                                    <option value="Pinar del Río">Pinar del Río</option>
+                                    <option value="Otra Provincia">Otra Provincia</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300 mb-1">Categoría *</label>
+                                <select id="denunciaCategory" name="category" required class="w-full bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500">
+                                    <option value="Apagones / SEN">Apagones / SEN</option>
+                                    <option value="Alimentación">Alimentación</option>
+                                    <option value="Salud / Hospitales">Salud / Hospitales</option>
+                                    <option value="Transporte">Transporte</option>
+                                    <option value="Derechos Ciudadanos">Derechos Ciudadanos</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300 mb-1">Detalles del Suceso *</label>
+                            <textarea id="denunciaBody" name="body" rows="4" required placeholder="Describe lo que sucede de forma clara. Indica hora aproximada y referencias visuales si es posible." class="w-full bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300 mb-1">URL de Foto / Evidencia (Opcional)</label>
+                            <input type="url" id="denunciaImage" name="image" placeholder="https://ejemplo.com/imagen.jpg (o dejar en blanco)" class="w-full bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500">
+                        </div>
+
+                        <div class="flex items-start space-x-2 pt-2">
+                            <input type="checkbox" id="anonCheck" name="anon" value="true" checked class="mt-1 rounded text-red-600 focus:ring-red-500">
+                            <label for="anonCheck" class="text-xs text-gray-500 dark:text-gray-400">
+                                Mantener esta denuncia 100% anónima. Entiendo que los datos serán públicos para visibilizar la situación.
+                            </label>
+                        </div>
+
+                        <button type="submit" id="denunciaSubmitBtn" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Enviar Denuncia para Revisión</span>
+                        </button>
+                    </form>
+
+                    <!-- Hidden iframe target: lets the form POST cross-origin to Google Apps Script without CORS issues -->
+                    <iframe name="denunciaHiddenFrame" id="denunciaHiddenFrame" class="hidden" title="envio-oculto"></iframe>
+                </div>
+
+                <!-- Live Stream Feed Column -->
+                <div class="lg:col-span-7 space-y-4">
+                    <div class="flex items-center justify-between border-b border-gray-200 dark:border-slate-700 pb-3">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                            <i class="fa-solid fa-list-check text-red-600"></i> Muro de Denuncias Comunitarias
+                        </h3>
+                        <span id="denunciaCountBadge" class="bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-gray-200 text-xs font-bold px-2.5 py-1 rounded-full">3 Registradas</span>
+                    </div>
+
+                    <div id="denunciasLiveFeed" class="space-y-4 max-h-[700px] overflow-y-auto pr-2 custom-scrollbar">
+                        <!-- Dynamic Feed Loaded via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE: INTERACTIVE MAP ================= -->
+        <section id="page-mapa" class="page-section hidden space-y-6">
+            <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-gray-100 dark:border-slate-700">
+                <h2 class="text-3xl font-black text-slate-900 dark:text-white uppercase mb-2">Mapa Interactivo de Afectaciones</h2>
+                <p class="text-gray-500 dark:text-gray-400 text-sm">Selecciona una provincia para examinar los reportes recientes de fallas eléctricas, escasez y acontecimientos locales.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Interactive Province Buttons / SVG Map Visualizer -->
+                <div class="lg:col-span-7 bg-white dark:bg-slate-800 p-6 rounded-2xl shadow border border-gray-100 dark:border-slate-700">
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Provincias de Cuba</h3>
+                    
+                    <!-- Simulated Map Grid of Provinces -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        <button onclick="loadProvinceData('La Habana')" class="prov-btn bg-slate-100 dark:bg-slate-700 hover:bg-red-600 hover:text-white p-4 rounded-xl border border-gray-200 dark:border-slate-600 text-left transition-all">
+                            <span class="block font-bold text-sm">La Habana</span>
+                            <span class="text-xs text-red-500 hover:text-white flex items-center gap-1 mt-1"><i class="fa-solid fa-bolt"></i> 18 reportes</span>
+                        </button>
+                        <button onclick="loadProvinceData('Santiago de Cuba')" class="prov-btn bg-slate-100 dark:bg-slate-700 hover:bg-red-600 hover:text-white p-4 rounded-xl border border-gray-200 dark:border-slate-600 text-left transition-all">
+                            <span class="block font-bold text-sm">Santiago de Cuba</span>
+                            <span class="text-xs text-red-500 hover:text-white flex items-center gap-1 mt-1"><i class="fa-solid fa-bolt"></i> 14 reportes</span>
+                        </button>
+                        <button onclick="loadProvinceData('Holguín')" class="prov-btn bg-slate-100 dark:bg-slate-700 hover:bg-red-600 hover:text-white p-4 rounded-xl border border-gray-200 dark:border-slate-600 text-left transition-all">
+                            <span class="block font-bold text-sm">Holguín</span>
+                            <span class="text-xs text-red-500 hover:text-white flex items-center gap-1 mt-1"><i class="fa-solid fa-bolt"></i> 11 reportes</span>
+                        </button>
+                        <button onclick="loadProvinceData('Camagüey')" class="prov-btn bg-slate-100 dark:bg-slate-700 hover:bg-red-600 hover:text-white p-4 rounded-xl border border-gray-200 dark:border-slate-600 text-left transition-all">
+                            <span class="block font-bold text-sm">Camagüey</span>
+                            <span class="text-xs text-red-500 hover:text-white flex items-center gap-1 mt-1"><i class="fa-solid fa-bolt"></i> 9 reportes</span>
+                        </button>
+                        <button onclick="loadProvinceData('Villa Clara')" class="prov-btn bg-slate-100 dark:bg-slate-700 hover:bg-red-600 hover:text-white p-4 rounded-xl border border-gray-200 dark:border-slate-600 text-left transition-all">
+                            <span class="block font-bold text-sm">Villa Clara</span>
+                            <span class="text-xs text-red-500 hover:text-white flex items-center gap-1 mt-1"><i class="fa-solid fa-bolt"></i> 8 reportes</span>
+                        </button>
+                        <button onclick="loadProvinceData('Guantánamo')" class="prov-btn bg-slate-100 dark:bg-slate-700 hover:bg-red-600 hover:text-white p-4 rounded-xl border border-gray-200 dark:border-slate-600 text-left transition-all">
+                            <span class="block font-bold text-sm">Guantánamo</span>
+                            <span class="text-xs text-red-500 hover:text-white flex items-center gap-1 mt-1"><i class="fa-solid fa-bolt"></i> 7 reportes</span>
+                        </button>
+                        <button onclick="loadProvinceData('Matanzas')" class="prov-btn bg-slate-100 dark:bg-slate-700 hover:bg-red-600 hover:text-white p-4 rounded-xl border border-gray-200 dark:border-slate-600 text-left transition-all">
+                            <span class="block font-bold text-sm">Matanzas</span>
+                            <span class="text-xs text-red-500 hover:text-white flex items-center gap-1 mt-1"><i class="fa-solid fa-bolt"></i> 6 reportes</span>
+                        </button>
+                        <button onclick="loadProvinceData('Pinar del Río')" class="prov-btn bg-slate-100 dark:bg-slate-700 hover:bg-red-600 hover:text-white p-4 rounded-xl border border-gray-200 dark:border-slate-600 text-left transition-all">
+                            <span class="block font-bold text-sm">Pinar del Río</span>
+                            <span class="text-xs text-red-500 hover:text-white flex items-center gap-1 mt-1"><i class="fa-solid fa-bolt"></i> 5 reportes</span>
+                        </button>
+                        <button onclick="loadProvinceData('Granma')" class="prov-btn bg-slate-100 dark:bg-slate-700 hover:bg-red-600 hover:text-white p-4 rounded-xl border border-gray-200 dark:border-slate-600 text-left transition-all">
+                            <span class="block font-bold text-sm">Granma</span>
+                            <span class="text-xs text-red-500 hover:text-white flex items-center gap-1 mt-1"><i class="fa-solid fa-bolt"></i> 4 reportes</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Detailed Province Feed -->
+                <div class="lg:col-span-5 bg-white dark:bg-slate-800 p-6 rounded-2xl shadow border border-gray-100 dark:border-slate-700">
+                    <h3 id="selectedProvinceName" class="text-xl font-bold text-slate-900 dark:text-white border-b border-gray-200 dark:border-slate-700 pb-3 mb-4">
+                        Selecciona una Provincia
+                    </h3>
+                    <div id="provinceDetailFeed" class="space-y-4">
+                        <p class="text-gray-500 text-sm italic">Haz clic en cualquiera de las provincias para filtrar los acontecimientos reportados.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE: GALERIA MULTIMEDIA ================= -->
+        <section id="page-galeria" class="page-section hidden space-y-6">
+            <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-gray-100 dark:border-slate-700">
+                <h2 class="text-3xl font-black text-slate-900 dark:text-white uppercase mb-2">Galería de Imágenes de la Vida Cotidiana</h2>
+                <p class="text-gray-500 dark:text-gray-400 text-sm">Fotografías y momentos documentados sobre la realidad social, la cultura y los retos diarios.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <!-- Gallery Item 1 -->
+                <div class="group relative overflow-hidden rounded-xl shadow-lg cursor-pointer h-64" onclick="openLightbox('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80', 'Arquitectura e historia viva en las calles de La Habana')">
+                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Galeria 1">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end text-white">
+                        <span class="text-xs font-bold text-red-400">La Habana</span>
+                        <p class="text-sm font-medium">Arquitectura e historia viva en las calles</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div class="group relative overflow-hidden rounded-xl shadow-lg cursor-pointer h-64" onclick="openLightbox('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1000&q=80', 'El transporte tradicional frente al dilema de combustible')">
+                    <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Galeria 2">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end text-white">
+                        <span class="text-xs font-bold text-red-400">Matanzas</span>
+                        <p class="text-sm font-medium">El transporte tradicional frente al dilema de combustible</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="group relative overflow-hidden rounded-xl shadow-lg cursor-pointer h-64" onclick="openLightbox('https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=1000&q=80', 'Encuentros en barrios comunitarios de Santiago de Cuba')">
+                    <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Galeria 3">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end text-white">
+                        <span class="text-xs font-bold text-red-400">Santiago de Cuba</span>
+                        <p class="text-sm font-medium">Encuentros en barrios comunitarios</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 4 -->
+                <div class="group relative overflow-hidden rounded-xl shadow-lg cursor-pointer h-64" onclick="openLightbox('https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1000&q=80', 'Costas y el mar Caribe rodeando la isla')">
+                    <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Galeria 4">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end text-white">
+                        <span class="text-xs font-bold text-red-400">Cienfuegos</span>
+                        <p class="text-sm font-medium">Costas y el mar Caribe rodeando la isla</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 5 -->
+                <div class="group relative overflow-hidden rounded-xl shadow-lg cursor-pointer h-64" onclick="openLightbox('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1000&q=80', 'El esfuerzo agrícola en los campos de Pinar del Río')">
+                    <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Galeria 5">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end text-white">
+                        <span class="text-xs font-bold text-red-400">Pinar del Río</span>
+                        <p class="text-sm font-medium">El esfuerzo agrícola en los campos</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 6 -->
+                <div class="group relative overflow-hidden rounded-xl shadow-lg cursor-pointer h-64" onclick="openLightbox('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=80', 'Mercados locales y el día a día del cubano')">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Galeria 6">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end text-white">
+                        <span class="text-xs font-bold text-red-400">Camagüey</span>
+                        <p class="text-sm font-medium">Mercados locales y el día a día</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE: SOBRE NOSOTROS ================= -->
+        <section id="page-nosotros" class="page-section hidden max-w-4xl mx-auto space-y-8">
+            <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-slate-700 space-y-6">
+                <div class="text-center space-y-3 border-b border-gray-200 dark:border-slate-700 pb-6">
+                    <span class="bg-red-100 text-red-600 dark:bg-red-950 dark:text-red-300 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                        Misión & Compromiso
+                    </span>
+                    <h2 class="text-3xl font-black text-slate-900 dark:text-white">Sobre La Realidad de Cuba</h2>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm max-w-xl mx-auto">
+                        Un espacio periodístico independiente creado para visibilizar los testimonios de los ciudadanos y la verdad cotidiana de la isla.
+                    </p>
+                </div>
+
+                <div class="prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300 space-y-4 text-sm md:text-base leading-relaxed">
+                    <p>
+                        <strong>La Realidad de Cuba</strong> nace ante la necesidad de ofrecer una cobertura transparente, objetiva y no censurada sobre la situación social, económica y humana en el país.
+                    </p>
+                    <p>
+                        Creemos fielmente en la fuerza del periodismo ciudadano. Por ello, combinamos el trabajo de investigación con un canal abierto de recepción de denuncias e imágenes enviadas de forma totalmente anónima y segura desde cualquier rincón de la isla.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
+                        <div class="p-4 bg-gray-50 dark:bg-slate-700/50 rounded-xl text-center">
+                            <i class="fa-solid fa-shield-cat text-3xl text-red-600 mb-2"></i>
+                            <h4 class="font-bold text-sm text-slate-900 dark:text-white">Anonimato</h4>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Protección estricta de la privacidad de los colaboradores.</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 dark:bg-slate-700/50 rounded-xl text-center">
+                            <i class="fa-solid fa-check-double text-3xl text-blue-600 mb-2"></i>
+                            <h4 class="font-bold text-sm text-slate-900 dark:text-white">Verificación</h4>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Contrastamos testimonios antes de su difusión final.</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 dark:bg-slate-700/50 rounded-xl text-center">
+                            <i class="fa-solid fa-bullhorn text-3xl text-emerald-600 mb-2"></i>
+                            <h4 class="font-bold text-sm text-slate-900 dark:text-white">Voz Ciudadana</h4>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">El protagonista principal es el pueblo cubano.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- NEWSLETTER & FOOTER -->
+    <footer class="bg-slate-900 text-white border-t border-slate-800 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <!-- Newsletter CTA Banner -->
+            <div class="bg-gradient-to-r from-red-900/50 to-slate-800 border border-red-800/40 rounded-2xl p-6 md:p-8 mb-12 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                    <h3 class="text-xl font-bold uppercase tracking-wide text-white">Suscríbete al Boletín Informativo</h3>
+                    <p class="text-gray-300 text-sm mt-1">Recibe un resumen semanal con las noticias y denuncias más relevantes en tu correo.</p>
+                </div>
+                <form onsubmit="handleNewsletterSubmit(event)" class="flex w-full md:w-auto gap-2">
+                    <input type="email" required placeholder="Tu correo electrónico" class="bg-slate-900 border border-slate-700 text-white text-sm rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-500 w-full md:w-64">
+                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase px-5 py-2.5 rounded-lg transition-all shrink-0">
+                        Suscribirse
+                    </button>
+                </form>
+            </div>
+
+            <!-- Main Footer Links Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 text-sm">
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-2">
+                        <div class="bg-red-600 text-white p-1.5 rounded">
+                            <i class="fa-solid fa-newspaper"></i>
+                        </div>
+                        <span class="font-black text-lg">LA REALIDAD DE CUBA</span>
+                    </div>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Periódico y portal de noticias independiente dedicado a la difusión imparcial de hechos en la República de Cuba.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Secciones</h4>
+                    <ul class="space-y-2 text-gray-400 text-xs">
+                        <li><a href="#" onclick="navigateTo('home')" class="hover:text-red-400">Inicio</a></li>
+                        <li><a href="#" onclick="navigateTo('noticias')" class="hover:text-red-400">Noticias de Hoy</a></li>
+                        <li><a href="#" onclick="navigateTo('denuncias')" class="hover:text-red-400">Muro de Denuncias</a></li>
+                        <li><a href="#" onclick="navigateTo('mapa')" class="hover:text-red-400">Mapa Interactivo</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Contacto & Redes</h4>
+                    <div class="flex space-x-3 mb-4">
+                        <a href="https://telegram.org" target="_blank" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-gray-300 hover:bg-red-600 hover:text-white transition-colors">
+                            <i class="fa-brands fa-telegram"></i>
+                        </a>
+                        <a href="https://twitter.com" target="_blank" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-gray-300 hover:bg-red-600 hover:text-white transition-colors">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-gray-300 hover:bg-red-600 hover:text-white transition-colors">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                    </div>
+                    <p class="text-xs text-gray-400">Canal seguro de Telegram activo 24/7</p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Seguridad</h4>
+                    <p class="text-xs text-gray-400 leading-relaxed mb-2">
+                        Sitio web cifrado de extremo a extremo. No guardamos cookies de rastreo ni registros de actividad personal.
+                    </p>
+                    <span class="inline-flex items-center gap-1.5 text-[10px] text-emerald-400 font-bold">
+                        <i class="fa-solid fa-lock"></i> Protocolo SSL Seguro Activo
+                    </span>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-6 text-center text-xs text-gray-500">
+                <p>&copy; 2026 La Realidad de Cuba (larealidaddecuba.com). Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL: Full Article Reader -->
+    <div id="articleModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-800 w-full max-w-3xl max-h-[90vh] rounded-2xl shadow-2xl overflow-y-auto custom-scrollbar relative border border-gray-200 dark:border-slate-700">
+            <!-- Close Button -->
+            <button onclick="closeArticleModal()" class="absolute top-4 right-4 bg-slate-900/80 hover:bg-red-600 text-white w-9 h-9 rounded-full flex items-center justify-center z-10 transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Modal Content -->
+            <div id="articleModalBody" class="p-6 md:p-8 space-y-4">
+                <!-- Content injected dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX MODAL FOR GALLERY -->
+    <div id="lightboxModal" class="fixed inset-0 z-50 hidden bg-black/95 flex flex-col items-center justify-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white hover:text-red-500 text-3xl">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <img id="lightboxImg" src="" class="max-w-full max-h-[80vh] rounded-lg shadow-2xl object-contain">
+        <p id="lightboxCaption" class="text-white text-center text-sm font-medium mt-4 max-w-xl"></p>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 space-y-2 pointer-events-none"></div>
+
+    <!-- APPLICATION JAVASCRIPT LOGIC -->
+    <script>
+        // ============================================================
+        // CONFIGURACIÓN DEL BACKEND DE DENUNCIAS (Google Apps Script)
+        // ============================================================
+        // 1. Sigue las instrucciones que te dio Claude para crear tu
+        //    Google Sheet + Apps Script y publicarlo como "Web App".
+        // 2. Pega aquí la URL que termina en /exec
+        // 3. ¡Listo! El formulario y el muro de denuncias pasarán a
+        //    funcionar con datos reales automáticamente.
+        const DENUNCIAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbySITL9BedhPgrk-eeoA78knGWV4G3spiCFvv7vlUjR0RA2zwwIp_SwY4zaH9BOvlsX/exec";
+
+        const BACKEND_CONFIGURED = DENUNCIAS_ENDPOINT && DENUNCIAS_ENDPOINT.startsWith("http");
+        const DENUNCIAS_REFRESH_INTERVAL_MS = 45000; // refresco automático del muro público
+
+        // Data Structures & Mock Articles
+        const articles = [
+            {
+                id: 1,
+                title: "La parálisis del SEN: Millones de familias cubanas enfrentan jornadas a oscuras y sin alimentos",
+                category: "Energía",
+                date: "16 Sep 2026",
+                readTime: "6 min",
+                author: "Redacción Periodística",
+                image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80",
+                summary: "Un recorrido exhaustivo por la crisis electroenergética, el colapso de la cadena de frío y el testimonio directo de ciudadanos en La Habana, Camagüey y Guantánamo.",
+                content: `
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300">La situación del Sistema Eléctrico Nacional (SEN) continúa registrando indicadores críticos de desconexión. Familias enteras en varias provincias reportan lapsos de luz de apenas tres a cuatro horas diarias, afectando de manera drástica el suministro de agua potable y la conservación de víveres esenciales.</p>
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300 mt-4">En municipios de La Habana como Diez de Octubre y Arroyo Naranjo, vecinos se han organizado para cocinar colectivamente utilizando carbón de leña. "La comida no aguanta en el congelador, todo se descompone rápidamente", comenta Elena, residente del reparto Santos Suárez.</p>
+                    <h4 class="font-bold text-lg text-slate-900 dark:text-white mt-6">Impacto en los Servicios Hospitalarios</h4>
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300 mt-2">La falta continua de fluido eléctrico impacta de igual manera a policlínicos y centros asistenciales, donde la disponibilidad de plantas generadoras auxiliares depende del abastecimiento irregular de diésel.</p>
+                `,
+                commentsCount: 84
+            },
+            {
+                id: 2,
+                title: "Aumento incesante de la canasta básica en el mercado informal",
+                category: "Economía",
+                date: "16 Sep 2026",
+                readTime: "4 min",
+                author: "Periodismo Ciudadano",
+                image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
+                summary: "El costo de productos elementales como el arroz, el frijol y el aceite sobrepasa los salarios promedio, obligando al uso de remesas.",
+                content: `
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300">El valor de los insumos alimenticios de primera necesidad experimenta variaciones semanales al alza. El precio del cartón de huevos y la libra de carne de cerdo continúan marcando techos imprevistos en los mercados independientes de la capital.</p>
+                `,
+                commentsCount: 42
+            },
+            {
+                id: 3,
+                title: "Escasez extrema de combustible reduce el transporte público al mínimo",
+                category: "Sociedad",
+                date: "15 Sep 2026",
+                readTime: "3 min",
+                author: "Equipo de Investigación",
+                image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80",
+                summary: "Las paradas de autobuses lucen desiertas en las mañanas mientras los camiones particulares elevan sus tarifas interprovinciales.",
+                content: `
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300">Moverse entre provincias se ha convertido en un dilema prolongado para los trabajadores y estudiantes. Las paradas principales registran aglomeraciones masivas desde horas de la madrugada.</p>
+                `,
+                commentsCount: 31
+            },
+            {
+                id: 4,
+                title: "Redes solidarias entre vecinos suplen falencias de asistencia en provincias",
+                category: "Historias",
+                date: "15 Sep 2026",
+                readTime: "5 min",
+                author: "Testimonio Comunitario",
+                image: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=800&q=80",
+                summary: "Iniciativas en Holguín y Santiago entregan sopas y apoyo a adultos mayores que viven en situación de soledad.",
+                content: `
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300">Ante las circunstancias actuales, grupos de jóvenes y familias preparan raciones comunitarias para distribuirlas entre ancianos y niños en sus propios vecindarios.</p>
+                `,
+                commentsCount: 19
+            },
+            {
+                id: 5,
+                title: "El dilema de la emigración joven y la despoblación en las aulas",
+                category: "Opinión",
+                date: "14 Sep 2026",
+                readTime: "7 min",
+                author: "Columna de Opinión",
+                image: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=800&q=80",
+                summary: "Un análisis sociológico sobre la éxodo profesional y el impacto en las escuelas y centros científicos de la isla.",
+                content: `
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300">El constante flujo migratorio está modificando la estructura demográfica de la nación, reduciendo sustancialmente la fuerza laboral capacitada en sectores clave.</p>
+                `,
+                commentsCount: 56
+            }
+        ];
+
+        // Demo-only seed data, shown ONLY while DENUNCIAS_ENDPOINT is not configured,
+        // so the page still looks alive while you set up the backend.
+        const DEMO_SEED_DENUNCIAS = [
+            {
+                id: 101,
+                title: "[DEMO] Salidero masivo de agua sin reparar en San Miguel del Padrón",
+                location: "La Habana",
+                category: "Infraestructura",
+                time: "Hace 20 min",
+                body: "Llevamos más de tres días con un salidero de agua potable frente al hospital mientras en los hogares no llega por la tubería central.",
+                author: "Anónimo"
+            },
+            {
+                id: 102,
+                title: "[DEMO] Apagón ininterrumpido supera las 20 horas en El Tivolí",
+                location: "Santiago de Cuba",
+                category: "Apagones / SEN",
+                time: "Hace 45 min",
+                body: "Sin electricidad desde las 4:00 PM del día de ayer. Los niños pequeños no pueden dormir por el calor y los mosquitos.",
+                author: "Vecino del Tivolí"
+            },
+            {
+                id: 103,
+                title: "[DEMO] Escasez de insumos médicos en Policlínico de Holguín",
+                location: "Holguín",
+                category: "Salud / Hospitales",
+                time: "Hace 2 horas",
+                body: "Pacientes deben llevar sus propias jeringas y gasas para ser atendidos en el área de urgencias.",
+                author: "Anónimo"
+            }
+        ];
+
+        // Live state: holds only VERIFIED & PUBLISHED reports coming from the backend
+        let liveDenuncias = BACKEND_CONFIGURED ? [] : DEMO_SEED_DENUNCIAS;
+
+        // Initialize on DOM Ready
+        window.addEventListener('DOMContentLoaded', () => {
+            renderNewsGrid(articles);
+            renderCitizenFeed();
+            renderHomeCitizenFeed();
+
+            const banner = document.getElementById('setupWarningBanner');
+            if (banner && !BACKEND_CONFIGURED) {
+                banner.classList.remove('hidden');
+            }
+
+            if (BACKEND_CONFIGURED) {
+                fetchPublishedDenuncias();
+                setInterval(fetchPublishedDenuncias, DENUNCIAS_REFRESH_INTERVAL_MS);
+            }
+        });
+
+        // ============================================================
+        // BACKEND INTEGRATION (Google Apps Script via JSONP)
+        // ============================================================
+        // JSONP is used instead of fetch() because Apps Script Web Apps
+        // don't return CORS headers on GET; loading it as a <script> tag
+        // sidesteps that entirely and works from any host.
+        function fetchPublishedDenuncias() {
+            if (!BACKEND_CONFIGURED) return;
+
+            const existingTag = document.getElementById('denunciasJsonpTag');
+            if (existingTag) existingTag.remove();
+
+            const script = document.createElement('script');
+            script.id = 'denunciasJsonpTag';
+            const separator = DENUNCIAS_ENDPOINT.includes('?') ? '&' : '?';
+            script.src = `${DENUNCIAS_ENDPOINT}${separator}callback=receivePublishedDenuncias&t=${Date.now()}`;
+            script.onerror = () => {
+                console.warn('No se pudo contactar el backend de denuncias. Se reintentará en el próximo ciclo.');
+            };
+            document.body.appendChild(script);
+        }
+
+        // Called by the JSONP response coming back from Apps Script
+        function receivePublishedDenuncias(data) {
+            if (!Array.isArray(data)) return;
+
+            const previousCount = liveDenuncias.length;
+            liveDenuncias = data;
+
+            renderCitizenFeed();
+            renderHomeCitizenFeed();
+
+            // Re-apply province filter if the map tab is showing one
+            const provHeader = document.getElementById('selectedProvinceName');
+            if (provHeader && !provHeader.innerText.includes('Selecciona')) {
+                const currentProv = provHeader.innerText.replace('Afectaciones en ', '');
+                loadProvinceData(currentProv);
+            }
+
+            if (data.length > previousCount && previousCount > 0) {
+                showToast('Se publicaron nuevas denuncias verificadas.', 'success');
+            }
+        }
+
+        // Navigation Controller
+        function navigateTo(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(sec => sec.classList.add('hidden'));
+            
+            // Show requested page
+            const targetPage = document.getElementById(`page-${pageId}`);
+            if (targetPage) {
+                targetPage.classList.remove('hidden');
+            }
+
+            // Update Navigation Button Active Styles
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if (btn.getAttribute('data-target') === pageId) {
+                    btn.classList.add('text-red-600', 'dark:text-red-400', 'border-b-2', 'border-red-600');
+                } else {
+                    btn.classList.remove('text-red-600', 'dark:text-red-400', 'border-b-2', 'border-red-600');
+                }
+            });
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('themeIcon');
+            const themeIconMobile = document.getElementById('themeIconMobile');
+
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                if (themeIcon) themeIcon.className = 'fa-solid fa-moon text-xl text-slate-700';
+                if (themeIconMobile) themeIconMobile.className = 'fa-solid fa-moon text-lg';
+            } else {
+                html.classList.add('dark');
+                if (themeIcon) themeIcon.className = 'fa-solid fa-sun text-xl text-yellow-400';
+                if (themeIconMobile) themeIconMobile.className = 'fa-solid fa-sun text-lg';
+            }
+        }
+
+        // Mobile Menu Drawer Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Render Main News Grid
+        function renderNewsGrid(data) {
+            const container = document.getElementById('newsGrid');
+            const allContainer = document.getElementById('allNewsGrid');
+            
+            const cardsHtml = data.map(art => `
+                <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg border border-gray-100 dark:border-slate-700 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-between" onclick="openArticleModal(${art.id})">
+                    <div>
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="${art.image}" class="w-full h-full object-cover" alt="${art.title}">
+                            <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow">
+                                ${art.category}
+                            </span>
+                        </div>
+                        <div class="p-5 space-y-2">
+                            <div class="flex items-center text-xs text-gray-400 space-x-3">
+                                <span><i class="fa-regular fa-calendar mr-1"></i> ${art.date}</span>
+                                <span><i class="fa-regular fa-clock mr-1"></i> ${art.readTime}</span>
+                            </div>
+                            <h3 class="font-bold text-lg text-slate-900 dark:text-white leading-snug article-title hover:text-red-600 transition-colors">
+                                ${art.title}
+                            </h3>
+                            <p class="text-xs text-gray-600 dark:text-gray-300 line-clamp-3 leading-relaxed">
+                                ${art.summary}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="px-5 pb-5 pt-2 border-t border-gray-100 dark:border-slate-700/50 flex items-center justify-between text-xs text-gray-500">
+                        <span>Por ${art.author}</span>
+                        <span class="text-red-500 font-semibold"><i class="fa-regular fa-comment mr-1"></i> ${art.commentsCount}</span>
+                    </div>
+                </div>
+            `).join('');
+
+            if (container) container.innerHTML = cardsHtml;
+            if (allContainer) allContainer.innerHTML = cardsHtml;
+        }
+
+        // Filter News by Category
+        function filterNews(cat) {
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.innerText.toLowerCase().includes(cat.toLowerCase()) || (cat === 'all' && btn.innerText.includes('Todas'))) {
+                    btn.className = 'cat-btn bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-lg shadow';
+                } else {
+                    btn.className = 'cat-btn bg-gray-200 dark:bg-slate-800 hover:bg-gray-300 dark:hover:bg-slate-700 text-xs font-bold px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300';
+                }
+            });
+
+            if (cat === 'all') {
+                renderNewsGrid(articles);
+            } else {
+                const filtered = articles.filter(a => a.category.toLowerCase().includes(cat.toLowerCase()));
+                renderNewsGrid(filtered);
+            }
+        }
+
+        // Live Search Bar Handler
+        function handleSearch(query) {
+            if (!query.trim()) {
+                renderNewsGrid(articles);
+                return;
+            }
+            const q = query.toLowerCase();
+            const filtered = articles.filter(a => a.title.toLowerCase().includes(q) || a.summary.toLowerCase().includes(q) || a.category.toLowerCase().includes(q));
+            renderNewsGrid(filtered);
+        }
+
+        // Render Citizen Reports Feed (Denuncias Tab)
+        function renderCitizenFeed() {
+            const feedContainer = document.getElementById('denunciasLiveFeed');
+            const countBadge = document.getElementById('denunciaCountBadge');
+            
+            if (countBadge) countBadge.innerText = `${liveDenuncias.length} Registradas`;
+
+            if (feedContainer && liveDenuncias.length === 0) {
+                feedContainer.innerHTML = `
+                    <div class="p-6 bg-gray-50 dark:bg-slate-700/50 rounded-xl text-center space-y-2">
+                        <i class="fa-solid fa-hourglass-half text-2xl text-gray-400"></i>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            ${BACKEND_CONFIGURED ? 'Aún no hay denuncias verificadas publicadas. Vuelve pronto.' : 'Cargando muro de denuncias...'}
+                        </p>
+                    </div>
+                `;
+                return;
+            }
+
+            if (feedContainer) {
+                feedContainer.innerHTML = liveDenuncias.map(d => `
+                    <div class="bg-white dark:bg-slate-800 p-5 rounded-xl shadow border-l-4 border-red-600 border-y border-r border-gray-100 dark:border-slate-700 space-y-2">
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="bg-red-100 dark:bg-red-950/60 text-red-600 dark:text-red-300 font-bold px-2 py-0.5 rounded">
+                                <i class="fa-solid fa-location-dot mr-1"></i> ${d.location}
+                            </span>
+                            <span class="text-gray-400"><i class="fa-regular fa-clock mr-1"></i> ${d.time}</span>
+                        </div>
+                        <h4 class="font-bold text-base text-slate-900 dark:text-white">${d.title}</h4>
+                        <p class="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">${d.body}</p>
+                        <div class="flex items-center justify-between text-[11px] text-gray-400 pt-2 border-t border-gray-100 dark:border-slate-700/50">
+                            <span>Categoría: <strong>${d.category}</strong></span>
+                            <span>Enviado por: <strong>${d.author}</strong></span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Render Top 3 Citizen Reports for Homepage
+        function renderHomeCitizenFeed() {
+            const container = document.getElementById('homeCitizenFeed');
+            if (container) {
+                const top3 = liveDenuncias.slice(0, 3);
+                container.innerHTML = top3.map(d => `
+                    <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 space-y-2">
+                        <div class="flex items-center justify-between text-[10px]">
+                            <span class="text-red-400 font-bold uppercase"><i class="fa-solid fa-location-dot mr-1"></i> ${d.location}</span>
+                            <span class="text-gray-400">${d.time}</span>
+                        </div>
+                        <h4 class="font-bold text-sm text-white line-clamp-1">${d.title}</h4>
+                        <p class="text-xs text-gray-300 line-clamp-2">${d.body}</p>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Submit New Denuncia Form Action
+        function handleDenunciaSubmit(e) {
+            const form = document.getElementById('denunciaForm');
+
+            if (!BACKEND_CONFIGURED) {
+                // Demo mode: no backend configured yet, don't actually submit anywhere.
+                e.preventDefault();
+                showToast("Modo demostración: configura DENUNCIAS_ENDPOINT para enviar denuncias reales.", "info");
+                return;
+            }
+
+            // Real mode: let the browser submit the native <form> POST to
+            // the hidden iframe pointed at the Apps Script Web App. This is
+            // a genuine cross-origin form submission, not fetch(), so no
+            // CORS restrictions apply. We do NOT preventDefault() here.
+            form.action = DENUNCIAS_ENDPOINT;
+
+            const submitBtn = document.getElementById('denunciaSubmitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>Enviando...</span>';
+
+            const iframe = document.getElementById('denunciaHiddenFrame');
+            iframe.onload = () => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i><span>Enviar Denuncia para Revisión</span>';
+                form.reset();
+                showToast("¡Denuncia enviada! Será revisada por nuestro equipo antes de publicarse.", "success");
+                iframe.onload = null; // avoid firing again on unrelated reloads
+            };
+
+            // Let the native form submission proceed (no e.preventDefault()).
+        }
+
+        // Load Province Specific Data for Interactive Map
+        function loadProvinceData(provName) {
+            const nameHeader = document.getElementById('selectedProvinceName');
+            const feedContainer = document.getElementById('provinceDetailFeed');
+
+            if (nameHeader) nameHeader.innerText = `Afectaciones en ${provName}`;
+
+            const provReports = liveDenuncias.filter(d => d.location.toLowerCase() === provName.toLowerCase());
+
+            if (provReports.length > 0) {
+                feedContainer.innerHTML = provReports.map(r => `
+                    <div class="p-4 bg-gray-50 dark:bg-slate-700/50 rounded-xl border-l-4 border-red-500 space-y-1">
+                        <span class="text-[10px] text-red-500 font-bold uppercase">${r.category}</span>
+                        <h4 class="font-bold text-sm text-slate-900 dark:text-white">${r.title}</h4>
+                        <p class="text-xs text-gray-600 dark:text-gray-300">${r.body}</p>
+                        <span class="text-[10px] text-gray-400 block pt-1">${r.time}</span>
+                    </div>
+                `).join('');
+            } else {
+                feedContainer.innerHTML = `
+                    <div class="p-4 bg-gray-50 dark:bg-slate-700/50 rounded-xl space-y-2 text-center">
+                        <i class="fa-solid fa-circle-info text-2xl text-yellow-500"></i>
+                        <p class="text-xs text-gray-600 dark:text-gray-300">No hay denuncias de las últimas horas registradas en ${provName}.</p>
+                        <button onclick="navigateTo('denuncias')" class="text-xs text-red-600 font-bold hover:underline">¿Deseas reportar un hecho en ${provName}?</button>
+                    </div>
+                `;
+            }
+        }
+
+        // Article Modal Opener
+        function openArticleModal(articleId) {
+            const art = articles.find(a => a.id === articleId);
+            if (!art) return;
+
+            const modalBody = document.getElementById('articleModalBody');
+            modalBody.innerHTML = `
+                <div class="space-y-4">
+                    <span class="bg-red-600 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                        ${art.category}
+                    </span>
+                    <h2 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white article-title leading-tight">
+                        ${art.title}
+                    </h2>
+                    <div class="flex items-center space-x-4 text-xs text-gray-400 border-b border-gray-200 dark:border-slate-700 pb-4">
+                        <span><i class="fa-regular fa-calendar mr-1"></i> ${art.date}</span>
+                        <span><i class="fa-solid fa-user-pen mr-1"></i> ${art.author}</span>
+                        <span><i class="fa-regular fa-clock mr-1"></i> ${art.readTime}</span>
+                    </div>
+                    <img src="${art.image}" class="w-full h-64 md:h-80 object-cover rounded-xl shadow-md" alt="${art.title}">
+                    <div class="prose dark:prose-invert max-w-none pt-2">
+                        ${art.content}
+                    </div>
+
+                    <!-- Article Share Bar -->
+                    <div class="flex items-center justify-between border-t border-b border-gray-200 dark:border-slate-700 py-3 mt-6">
+                        <span class="text-xs font-bold uppercase text-gray-500">Compartir noticia:</span>
+                        <div class="flex space-x-2">
+                            <button onclick="copyArticleLink()" class="bg-slate-200 dark:bg-slate-700 hover:bg-red-600 hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-colors">
+                                <i class="fa-solid fa-link mr-1"></i> Copiar Enlace
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Mock Comments Section -->
+                    <div class="pt-4 space-y-4">
+                        <h3 class="font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2">
+                            <i class="fa-regular fa-comments text-red-600"></i> Comentarios de Lectores (${art.commentsCount})
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="bg-gray-50 dark:bg-slate-700/50 p-3 rounded-lg text-xs space-y-1">
+                                <div class="flex justify-between font-bold text-slate-900 dark:text-white">
+                                    <span>Carlos M. (La Habana)</span>
+                                    <span class="text-gray-400 font-normal">Hace 1 hora</span>
+                                </div>
+                                <p class="text-gray-600 dark:text-gray-300">Exactamente así es la realidad diaria. Gracias por visibilizar lo que estamos viviendo.</p>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-slate-700/50 p-3 rounded-lg text-xs space-y-1">
+                                <div class="flex justify-between font-bold text-slate-900 dark:text-white">
+                                    <span>Anónimo (Holguín)</span>
+                                    <span class="text-gray-400 font-normal">Hace 3 horas</span>
+                                </div>
+                                <p class="text-gray-600 dark:text-gray-300">Acá en el oriente la situación con el agua también es extrema.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('articleModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeArticleModal() {
+            document.getElementById('articleModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Lightbox Gallery Functions
+        function openLightbox(imgSrc, caption) {
+            document.getElementById('lightboxImg').src = imgSrc;
+            document.getElementById('lightboxCaption').innerText = caption;
+            document.getElementById('lightboxModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Toast Notification System
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            
+            toast.className = `pointer-events-auto bg-slate-900 text-white border-l-4 ${type === 'success' ? 'border-emerald-500' : 'border-red-500'} p-4 rounded-xl shadow-2xl flex items-center space-x-3 text-xs font-semibold transform transition-all duration-300 translate-y-2 opacity-0`;
+            
+            toast.innerHTML = `
+                <i class="fa-solid ${type === 'success' ? 'fa-circle-check text-emerald-400' : 'fa-bell text-red-400'} text-base"></i>
+                <span>${message}</span>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        // Newsletter Handler
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            showToast("¡Te has suscrito correctamente al boletín informativo!", "success");
+            e.target.reset();
+        }
+
+        // Helper to copy links
+        function copyArticleLink() {
+            const tempInput = document.createElement('input');
+            tempInput.value = window.location.href;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            showToast("Enlace de la noticia copiado al portapapeles", "success");
+        }
+    </script>
+</body>
+</html>
