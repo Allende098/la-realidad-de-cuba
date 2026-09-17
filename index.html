@@ -80,13 +80,14 @@
         </span>
         <div class="ticker-wrap w-full overflow-hidden">
             <div class="ticker-move flex items-center space-x-8">
-                <span class="inline-flex items-center"><i class="fa-solid fa-bolt text-yellow-300 mr-2"></i> SEN-La Habana: Reportan apagones de más de 16 horas en múltiples municipios del país.</span>
-                <span class="inline-flex items-center"><i class="fa-solid fa-chart-line text-red-300 mr-2"></i> Mercado Informal: El dólar alcanza nuevo máximo histórico frente al CUP.</span>
-                <span class="inline-flex items-center"><i class="fa-solid fa-users text-blue-300 mr-2"></i> Sociedad: Vecinos en Holguín impulsan comedor comunitario autogestionado.</span>
-                <span class="inline-flex items-center"><i class="fa-solid fa-camera text-green-300 mr-2"></i> Denuncias: Más de 40 reportes recibidos hoy en nuestro portal anónimo.</span>
+                <span class="inline-flex items-center"><i class="fa-solid fa-bolt text-yellow-300 mr-2"></i> SEN: Déficit eléctrico supera los 2,100 MW; sexto apagón nacional del año.</span>
+                <span class="inline-flex items-center"><i class="fa-solid fa-chart-line text-red-300 mr-2"></i> Mercado Informal: El dólar cierra en 699 CUP, nuevo máximo histórico.</span>
+                <span class="inline-flex items-center"><i class="fa-solid fa-truck-medical text-purple-300 mr-2"></i> Salud: Solo el 30% del cuadro básico de medicamentos está disponible.</span>
+                <span class="inline-flex items-center"><i class="fa-solid fa-hand-holding-heart text-blue-300 mr-2"></i> Sociedad: Cáritas distribuye ayuda humanitaria de EE.UU. en Villa Clara.</span>
+                <span class="inline-flex items-center"><i class="fa-solid fa-camera text-green-300 mr-2"></i> Denuncias: envía tu reporte anónimo, será verificado antes de publicarse.</span>
                 <!-- Duplicated for infinite smooth loop -->
-                <span class="inline-flex items-center"><i class="fa-solid fa-bolt text-yellow-300 mr-2"></i> SEN-La Habana: Reportan apagones de más de 16 horas en múltiples municipios del país.</span>
-                <span class="inline-flex items-center"><i class="fa-solid fa-chart-line text-red-300 mr-2"></i> Mercado Informal: El dólar alcanza nuevo máximo histórico frente al CUP.</span>
+                <span class="inline-flex items-center"><i class="fa-solid fa-bolt text-yellow-300 mr-2"></i> SEN: Déficit eléctrico supera los 2,100 MW; sexto apagón nacional del año.</span>
+                <span class="inline-flex items-center"><i class="fa-solid fa-chart-line text-red-300 mr-2"></i> Mercado Informal: El dólar cierra en 699 CUP, nuevo máximo histórico.</span>
             </div>
         </div>
     </div>
@@ -144,6 +145,12 @@
                     Testimonios y Denuncias <span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold animate-pulse">EN VIVO</span>
                 </button>
                 <button onclick="navigateTo('mapa')" class="nav-btn hover:text-red-600 dark:hover:text-red-400 transition-colors" data-target="mapa">Mapa de la Situación</button>
+                
+                <!-- NUEVO APARTADO: PRESOS POLÍTICOS -->
+                <a href="https://www.prisonersdefenders.org/presos-politicos-en-cuba/prisioneros-politicos/" target="_blank" rel="noopener noreferrer" class="hover:text-red-600 dark:hover:text-red-400 transition-colors flex items-center gap-1.5 text-red-600 dark:text-red-400 font-bold">
+                    <i class="fa-solid fa-handcuffs"></i> Presos Políticos <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+
                 <button onclick="navigateTo('galeria')" class="nav-btn hover:text-red-600 dark:hover:text-red-400 transition-colors" data-target="galeria">Galería Multimedia</button>
                 <button onclick="navigateTo('nosotros')" class="nav-btn hover:text-red-600 dark:hover:text-red-400 transition-colors" data-target="nosotros">Sobre Nosotros</button>
             </nav>
@@ -159,6 +166,13 @@
             <a href="#" onclick="navigateTo('noticias'); toggleMobileMenu()" class="block py-2 text-gray-800 dark:text-gray-200 font-medium border-b border-gray-100 dark:border-slate-700">Noticias</a>
             <a href="#" onclick="navigateTo('denuncias'); toggleMobileMenu()" class="block py-2 text-gray-800 dark:text-gray-200 font-medium border-b border-gray-100 dark:border-slate-700">Testimonios y Denuncias</a>
             <a href="#" onclick="navigateTo('mapa'); toggleMobileMenu()" class="block py-2 text-gray-800 dark:text-gray-200 font-medium border-b border-gray-100 dark:border-slate-700">Mapa Interactivo</a>
+            
+            <!-- NUEVO APARTADO MÓVIL: PRESOS POLÍTICOS -->
+            <a href="https://www.prisonersdefenders.org/presos-politicos-en-cuba/prisioneros-politicos/" target="_blank" rel="noopener noreferrer" class="block py-2 text-red-600 dark:text-red-400 font-bold border-b border-gray-100 dark:border-slate-700 flex items-center justify-between">
+                <span><i class="fa-solid fa-handcuffs mr-2"></i>Presos Políticos (Prisoners Defenders)</span>
+                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+            </a>
+
             <a href="#" onclick="navigateTo('galeria'); toggleMobileMenu()" class="block py-2 text-gray-800 dark:text-gray-200 font-medium border-b border-gray-100 dark:border-slate-700">Galería Multimedia</a>
             <a href="#" onclick="navigateTo('nosotros'); toggleMobileMenu()" class="block py-2 text-gray-800 dark:text-gray-200 font-medium">Sobre Nosotros</a>
             <button onclick="navigateTo('denuncias'); toggleMobileMenu()" class="w-full bg-red-600 text-white font-bold py-2.5 rounded-lg shadow mt-2 flex items-center justify-center gap-2">
@@ -179,7 +193,7 @@
                 <!-- Featured Main Headline (Large) -->
                 <div class="lg:col-span-8 group cursor-pointer" onclick="openArticleModal(1)">
                     <div class="relative overflow-hidden rounded-2xl shadow-xl h-96 md:h-[480px]">
-                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80" alt="La Habana al atardecer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1200&q=80" alt="La Habana al atardecer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent"></div>
                         <div class="absolute top-4 left-4 flex gap-2">
                             <span class="bg-red-600 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow">
@@ -192,15 +206,15 @@
                         <div class="absolute bottom-0 p-6 md:p-8 text-white space-y-3">
                             <span class="text-xs text-red-400 font-semibold tracking-wider uppercase">ENERGÍA & SOCIEDAD</span>
                             <h2 class="text-2xl md:text-4xl font-bold article-title leading-tight hover:text-red-400 transition-colors">
-                                La parálisis del SEN: Millones de familias cubanas enfrentan jornadas a oscuras y sin alimentos
+                                Cuba registra su sexto apagón nacional del año en medio de un déficit eléctrico crítico
                             </h2>
                             <p class="text-gray-300 text-sm md:text-base line-clamp-2 font-light">
-                                Un recorrido exhaustivo por la crisis electroenergética, el colapso de la cadena de frío y el testimonio directo de ciudadanos en La Habana, Camagüey y Guantánamo.
+                                La Unión Eléctrica reportó una afectación superior a los 2,100 MW este martes, con una demanda que roza los 3,350 MW y una disponibilidad real de apenas 1,200 MW.
                             </p>
                             <div class="flex items-center space-x-4 text-xs text-gray-400 pt-2">
                                 <span><i class="fa-regular fa-calendar mr-1"></i> 16 Sep 2026</span>
                                 <span><i class="fa-solid fa-user-shield mr-1"></i> Redacción Periodística</span>
-                                <span><i class="fa-regular fa-comment mr-1"></i> 84 Comentarios</span>
+                                <span><i class="fa-regular fa-comment mr-1"></i> 97 Comentarios</span>
                             </div>
                         </div>
                     </div>
@@ -217,12 +231,12 @@
 
                     <!-- Side Story 1 -->
                     <div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow border border-gray-100 dark:border-slate-700 hover:border-red-500 transition-all cursor-pointer flex space-x-4" onclick="openArticleModal(2)">
-                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=300&q=80" class="w-24 h-24 rounded-lg object-cover flex-shrink-0" alt="Mercado">
+                        <img src="https://images.unsplash.com/photo-1673757641453-7ebb8f2dfccf?auto=format&fit=crop&w=300&q=80" class="w-24 h-24 rounded-lg object-cover flex-shrink-0" alt="Mercado">
                         <div class="flex flex-col justify-between">
                             <div>
                                 <span class="text-[10px] font-bold text-red-500 uppercase">Economía</span>
                                 <h4 class="font-bold text-sm text-slate-900 dark:text-white line-clamp-2 hover:text-red-500 transition-colors">
-                                    Aumento incesante de la canasta básica en el mercado informal
+                                    El dólar cierra en un nuevo máximo histórico en el mercado informal
                                 </h4>
                             </div>
                             <span class="text-xs text-gray-400"><i class="fa-regular fa-clock mr-1"></i> Hace 2 horas</span>
@@ -231,12 +245,12 @@
 
                     <!-- Side Story 2 -->
                     <div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow border border-gray-100 dark:border-slate-700 hover:border-red-500 transition-all cursor-pointer flex space-x-4" onclick="openArticleModal(3)">
-                        <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=300&q=80" class="w-24 h-24 rounded-lg object-cover flex-shrink-0" alt="Transporte">
+                        <img src="https://images.unsplash.com/photo-1706329299293-61d3576215db?auto=format&fit=crop&w=300&q=80" class="w-24 h-24 rounded-lg object-cover flex-shrink-0" alt="Transporte">
                         <div class="flex flex-col justify-between">
                             <div>
                                 <span class="text-[10px] font-bold text-blue-500 uppercase">Transporte</span>
                                 <h4 class="font-bold text-sm text-slate-900 dark:text-white line-clamp-2 hover:text-red-500 transition-colors">
-                                    Escasez extrema de combustible reduce el transporte público al mínimo
+                                    Escasez de combustible deja el transporte público al mínimo
                                 </h4>
                             </div>
                             <span class="text-xs text-gray-400"><i class="fa-regular fa-clock mr-1"></i> Hace 4 horas</span>
@@ -245,12 +259,12 @@
 
                     <!-- Side Story 3 -->
                     <div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow border border-gray-100 dark:border-slate-700 hover:border-red-500 transition-all cursor-pointer flex space-x-4" onclick="openArticleModal(4)">
-                        <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=300&q=80" class="w-24 h-24 rounded-lg object-cover flex-shrink-0" alt="Comunidad">
+                        <img src="https://images.unsplash.com/photo-1579516276963-9abe6c8d10b9?auto=format&fit=crop&w=300&q=80" class="w-24 h-24 rounded-lg object-cover flex-shrink-0" alt="Comunidad">
                         <div class="flex flex-col justify-between">
                             <div>
                                 <span class="text-[10px] font-bold text-emerald-500 uppercase">Comunidad</span>
                                 <h4 class="font-bold text-sm text-slate-900 dark:text-white line-clamp-2 hover:text-red-500 transition-colors">
-                                    Redes solidarias entre vecinos suplen falencias de asistencia en provincias
+                                    Cáritas distribuye ayuda humanitaria de EE.UU. entre familias de Villa Clara
                                 </h4>
                             </div>
                             <span class="text-xs text-gray-400"><i class="fa-regular fa-clock mr-1"></i> Hace 5 horas</span>
@@ -638,6 +652,7 @@
                         <li><a href="#" onclick="navigateTo('noticias')" class="hover:text-red-400">Noticias de Hoy</a></li>
                         <li><a href="#" onclick="navigateTo('denuncias')" class="hover:text-red-400">Muro de Denuncias</a></li>
                         <li><a href="#" onclick="navigateTo('mapa')" class="hover:text-red-400">Mapa Interactivo</a></li>
+                        <li><a href="https://www.prisonersdefenders.org/presos-politicos-en-cuba/prisioneros-politicos/" target="_blank" rel="noopener noreferrer" class="hover:text-red-400 font-bold text-red-400">Presos Políticos</a></li>
                     </ul>
                 </div>
 
@@ -706,95 +721,142 @@
         // ============================================================
         // CONFIGURACIÓN DEL BACKEND DE DENUNCIAS (Google Apps Script)
         // ============================================================
-        // 1. Sigue las instrucciones que te dio Claude para crear tu
-        //    Google Sheet + Apps Script y publicarlo como "Web App".
-        // 2. Pega aquí la URL que termina en /exec
-        // 3. ¡Listo! El formulario y el muro de denuncias pasarán a
-        //    funcionar con datos reales automáticamente.
         const DENUNCIAS_ENDPOINT = "PEGA_AQUI_TU_URL_DE_APPS_SCRIPT";
 
         const BACKEND_CONFIGURED = DENUNCIAS_ENDPOINT && DENUNCIAS_ENDPOINT.startsWith("http");
-        const DENUNCIAS_REFRESH_INTERVAL_MS = 45000; // refresco automático del muro público
+        const DENUNCIAS_REFRESH_INTERVAL_MS = 45000;
 
-        // Data Structures & Mock Articles
+        // Data Structures & Current Articles
         const articles = [
             {
                 id: 1,
-                title: "La parálisis del SEN: Millones de familias cubanas enfrentan jornadas a oscuras y sin alimentos",
+                title: "Cuba registra su sexto apagón nacional del año en medio de un déficit eléctrico crítico",
                 category: "Energía",
                 date: "16 Sep 2026",
                 readTime: "6 min",
                 author: "Redacción Periodística",
-                image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80",
-                summary: "Un recorrido exhaustivo por la crisis electroenergética, el colapso de la cadena de frío y el testimonio directo de ciudadanos en La Habana, Camagüey y Guantánamo.",
+                image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1000&q=80",
+                summary: "La Unión Eléctrica reportó una afectación superior a los 2,100 MW este martes, mientras la demanda del país roza los 3,350 MW y la disponibilidad real apenas supera los 1,200 MW.",
                 content: `
-                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300">La situación del Sistema Eléctrico Nacional (SEN) continúa registrando indicadores críticos de desconexión. Familias enteras en varias provincias reportan lapsos de luz de apenas tres a cuatro horas diarias, afectando de manera drástica el suministro de agua potable y la conservación de víveres esenciales.</p>
-                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300 mt-4">En municipios de La Habana como Diez de Octubre y Arroyo Naranjo, vecinos se han organizado para cocinar colectivamente utilizando carbón de leña. "La comida no aguanta en el congelador, todo se descompone rápidamente", comenta Elena, residente del reparto Santos Suárez.</p>
-                    <h4 class="font-bold text-lg text-slate-900 dark:text-white mt-6">Impacto en los Servicios Hospitalarios</h4>
-                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300 mt-2">La falta continua de fluido eléctrico impacta de igual manera a policlínicos y centros asistenciales, donde la disponibilidad de plantas generadoras auxiliares depende del abastecimiento irregular de diésel.</p>
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300">El Sistema Electroenergético Nacional (SEN) cerró otra jornada crítica el martes, con una afectación máxima de 2,168 MW durante la noche, por encima de lo previsto por la Unión Eléctrica (UNE) para ese día. El servicio estuvo interrumpido durante las 24 horas y se prolongó hasta la madrugada, sin que el sistema lograra cubrir la demanda en ningún momento.</p>
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300 mt-4">Para este miércoles el déficit vuelve a superar los 2,100 MW, con una disponibilidad de generación que ronda apenas los 1,220 MW frente a una demanda prevista cercana a los 3,350 MW. Es el sexto colapso o afectación mayor del sistema en lo que va de 2026, en una crisis que las autoridades atribuyen al bloqueo de combustible impuesto por Estados Unidos, mientras especialistas independientes señalan también la falta de mantenimiento en termoeléctricas que superan los 40 años de funcionamiento.</p>
+                    <h4 class="font-bold text-lg text-slate-900 dark:text-white mt-6">Una mejora que no alcanza</h4>
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300 mt-2">El régimen ha destacado la reincorporación de algunas unidades generadoras y la entrada de nuevos parques solares, que ya superan los 1,000 MW de capacidad fotovoltaica instalada. Sin embargo, más de 1,200 MW de capacidad siguen paralizados por falta de piezas y combustible, por lo que los cortes de más de 15 horas diarias continúan siendo la norma en buena parte del territorio nacional.</p>
+                    <p class="text-xs text-gray-400 mt-6 italic">Con información de la Unión Eléctrica de Cuba (UNE) y agencias.</p>
                 `,
-                commentsCount: 84
+                commentsCount: 97
             },
             {
                 id: 2,
-                title: "Aumento incesante de la canasta básica en el mercado informal",
+                title: "El dólar cierra en un nuevo máximo histórico en el mercado informal cubano",
                 category: "Economía",
-                date: "16 Sep 2026",
+                date: "17 Sep 2026",
                 readTime: "4 min",
-                author: "Periodismo Ciudadano",
-                image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
-                summary: "El costo de productos elementales como el arroz, el frijol y el aceite sobrepasa los salarios promedio, obligando al uso de remesas.",
+                author: "Redacción Económica",
+                image: "https://images.unsplash.com/photo-1673757641453-7ebb8f2dfccf?auto=format&fit=crop&w=800&q=80",
+                summary: "El billete verde se cotizó este miércoles en 699 pesos cubanos, un avance del 1.7% en apenas una semana, mientras el euro se mantiene firme en sus máximos recientes.",
                 content: `
-                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300">El valor de los insumos alimenticios de primera necesidad experimenta variaciones semanales al alza. El precio del cartón de huevos y la libra de carne de cerdo continúan marcando techos imprevistos en los mercados independientes de la capital.</p>
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300">El mercado informal de divisas en Cuba cerró la jornada del miércoles con el dólar estadounidense al alza y el euro firme en sus valores más altos de las últimas semanas. Según el seguimiento habitual de la tasa informal, el dólar se ubicó en un valor medio de 699 pesos cubanos (CUP), 1.5 pesos por encima del cierre anterior.</p>
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300 mt-4">En apenas siete días, el billete verde ha subido 11.5 pesos desde los 688 CUP que marcaba la semana pasada, un incremento del 1.7% que confirma la tendencia alcista sostenida. El deterioro del peso cubano frente a las principales divisas continúa presionando el costo de los productos básicos, la mayoría de los cuales dependen directa o indirectamente de precios fijados en moneda extranjera.</p>
+                    <h4 class="font-bold text-lg text-slate-900 dark:text-white mt-6">Salarios que no alcanzan</h4>
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300 mt-2">Con salarios estatales promedio que rondan apenas unos pocos dólares al cambio informal, cada vez más familias dependen de las remesas del exterior para cubrir la canasta básica, cuyos precios en los mercados particulares continúan marcando máximos históricos.</p>
+                    <p class="text-xs text-gray-400 mt-6 italic">Con información de CiberCuba.</p>
                 `,
-                commentsCount: 42
+                commentsCount: 63
             },
             {
                 id: 3,
-                title: "Escasez extrema de combustible reduce el transporte público al mínimo",
+                title: "La escasez de combustible deja el transporte público al mínimo y dispara el mercado negro",
                 category: "Sociedad",
                 date: "15 Sep 2026",
-                readTime: "3 min",
+                readTime: "5 min",
                 author: "Equipo de Investigación",
-                image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80",
-                summary: "Las paradas de autobuses lucen desiertas en las mañanas mientras los camiones particulares elevan sus tarifas interprovinciales.",
+                image: "https://images.unsplash.com/photo-1706329299293-61d3576215db?auto=format&fit=crop&w=800&q=80",
+                summary: "Las gasolineras en pesos cubanos dejaron de operar y la venta en dólares exige reservar turno con semanas de espera, mientras miles de cubanos recurren a bicicletas y triciclos para moverse.",
                 content: `
-                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300">Moverse entre provincias se ha convertido en un dilema prolongado para los trabajadores y estudiantes. Las paradas principales registran aglomeraciones masivas desde horas de la madrugada.</p>
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300">La falta de combustible ha reducido a niveles mínimos la circulación de ómnibus y trenes estatales en toda la isla, dejando los asientos disponibles reservados casi exclusivamente para casos de urgencia. Las estaciones de servicio que vendían en pesos cubanos permanecen cerradas, mientras las que operan en dólares exigen reservar turno mediante una aplicación móvil, con esperas que pueden extenderse por meses.</p>
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300 mt-4">Ante este panorama, miles de personas han vuelto a la bicicleta, la moto y el triciclo como única alternativa viable para desplazarse a diario. Los choferes de camiones adaptados, que cobran el pasaje en efectivo, reportan una caída en la cantidad de pasajeros porque muchos ya no pueden costear las nuevas tarifas.</p>
+                    <h4 class="font-bold text-lg text-slate-900 dark:text-white mt-6">Familias divididas por la distancia</h4>
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300 mt-2">Las restricciones al transporte interprovincial han complicado también las visitas familiares y el acceso a servicios médicos especializados que solo existen en las capitales de provincia, obligando a algunos cubanos a permanecer separados de sus seres queridos por semanas.</p>
+                    <p class="text-xs text-gray-400 mt-6 italic">Con información de agencias internacionales.</p>
                 `,
-                commentsCount: 31
+                commentsCount: 45
             },
             {
                 id: 4,
-                title: "Redes solidarias entre vecinos suplen falencias de asistencia en provincias",
+                title: "Cáritas distribuye ayuda humanitaria de Estados Unidos entre familias de Villa Clara",
                 category: "Historias",
-                date: "15 Sep 2026",
-                readTime: "5 min",
+                date: "12 Sep 2026",
+                readTime: "4 min",
                 author: "Testimonio Comunitario",
-                image: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=800&q=80",
-                summary: "Iniciativas en Holguín y Santiago entregan sopas y apoyo a adultos mayores que viven en situación de soledad.",
+                image: "https://images.unsplash.com/photo-1579516276963-9abe6c8d10b9?auto=format&fit=crop&w=800&q=80",
+                summary: "700 kits de alimentos y otros 700 de higiene llegaron a Santa Clara para apoyar a familias de Quemado de Güines y Rancho Veloz, en medio de una crisis que ya se extiende por seis años.",
                 content: `
-                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300">Ante las circunstancias actuales, grupos de jóvenes y familias preparan raciones comunitarias para distribuirlas entre ancianos y niños en sus propios vecindarios.</p>
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300">Las autoridades católicas de Santa Clara recibieron un nuevo cargamento de ayuda humanitaria proveniente de Estados Unidos, compuesto por 700 kits de alimentos y otros 700 de artículos de higiene, destinados a familias de los municipios de Quemado de Güines y Rancho Veloz. La distribución quedó a cargo de Cáritas, que priorizará los casos de mayor vulnerabilidad.</p>
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300 mt-4">El envío se suma al decimotercer cargamento de ayuda que Cuba recibe desde México en lo que va del año, acompañado de donativos de países miembros de la Caricom. Organizaciones como el Convoy Nuestra América, integrado por activistas de Europa, México y Estados Unidos, junto a la ONG española Open Arms, también han trasladado alimentos, insumos médicos y paneles solares hacia distintas zonas de la isla.</p>
+                    <h4 class="font-bold text-lg text-slate-900 dark:text-white mt-6">Una respuesta frente a una crisis que se prolonga</h4>
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300 mt-2">La entrega ocurre en un contexto de apagones que superan las 20 horas diarias en amplias zonas del país, junto con escasez de alimentos, combustible y medicamentos, y una dolarización parcial de la economía que ha golpeado con fuerza el poder adquisitivo de los salarios estatales.</p>
+                    <p class="text-xs text-gray-400 mt-6 italic">Con información de agencias internacionales.</p>
                 `,
-                commentsCount: 19
+                commentsCount: 28
             },
             {
                 id: 5,
-                title: "El dilema de la emigración joven y la despoblación en las aulas",
+                title: "El sistema de salud cubano funciona con apenas el 30% del cuadro básico de medicamentos",
+                category: "Sociedad",
+                date: "15 Sep 2026",
+                readTime: "6 min",
+                author: "Redacción Periodística",
+                image: "https://images.unsplash.com/photo-1755995083683-50d08cd83d09?auto=format&fit=crop&w=800&q=80",
+                summary: "Más de 96,000 cirugías permanecen pendientes y el país perdió más de 30,000 médicos entre 2021 y 2024, según cifras reconocidas por las propias autoridades sanitarias.",
+                content: `
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300">El sistema hospitalario cubano atraviesa lo que las propias autoridades del sector han calificado como una crisis estructural sin precedentes. Actualmente solo está disponible cerca del 30% del cuadro básico de medicamentos, mientras se acumulan más de 96,000 cirugías pendientes por falta de insumos, personal y suministro eléctrico estable.</p>
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300 mt-4">La escasez alcanza incluso a los materiales más elementales: se han reportado casos de pacientes que deben comprar por su cuenta algodón, gasas, hilo de sutura o jeringuillas antes de poder recibir atención en policlínicos y hospitales. El éxodo de personal médico agrava el problema: el país pasó de más de 106,000 profesionales de la salud registrados en 2021 a poco más de 75,000 en 2024.</p>
+                    <h4 class="font-bold text-lg text-slate-900 dark:text-white mt-6">Los apagones agravan la emergencia</h4>
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300 mt-2">Los cortes eléctricos, que en varias provincias superan las 15 horas diarias, obligan a los centros de salud a suspender buena parte de sus servicios, manteniendo activos únicamente cuidados intensivos y urgencias cuando logran contar con combustible para sus plantas generadoras.</p>
+                    <p class="text-xs text-gray-400 mt-6 italic">Con información de organismos de salud y prensa cubana independiente.</p>
+                `,
+                commentsCount: 71
+            },
+            {
+                id: 6,
+                title: "Encuesta: el 82% de los cubanos califica de mala la situación de hospitales y centros de salud",
                 category: "Opinión",
-                date: "14 Sep 2026",
-                readTime: "7 min",
+                date: "13 Sep 2026",
+                readTime: "5 min",
                 author: "Columna de Opinión",
                 image: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=800&q=80",
-                summary: "Un análisis sociológico sobre la éxodo profesional y el impacto en las escuelas y centros científicos de la isla.",
+                summary: "Un informe del Observatorio Cubano de Derechos Humanos, basado en más de 1,300 entrevistas en todo el país, revela que dos de cada tres cubanos respaldan un sistema de salud y educación mixto, público y privado.",
                 content: `
-                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300">El constante flujo migratorio está modificando la estructura demográfica de la nación, reduciendo sustancialmente la fuerza laboral capacitada en sectores clave.</p>
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300">El más reciente informe del Observatorio Cubano de Derechos Humanos (OCDH) sobre el estado de los derechos sociales en la isla ofrece una radiografía preocupante de la percepción ciudadana. El estudio, realizado entre finales de junio y julio con 1,318 entrevistas en 79 municipios de todas las provincias, encontró que los cortes eléctricos encabezan la lista de preocupaciones urgentes, mencionados por el 70% de los encuestados.</p>
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300 mt-4">La salud y el acceso a medicamentos aparecen en el 34% de las respuestas, justo detrás de la crisis alimentaria y el costo de la vida. Un 82% de los consultados calificó como mala la situación de hospitales y centros de salud del país, y dos de cada tres personas se mostraron a favor de una fórmula que combine oferta pública y privada para estos servicios esenciales.</p>
+                    <h4 class="font-bold text-lg text-slate-900 dark:text-white mt-6">Una brecha generacional</h4>
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300 mt-2">El respaldo a un modelo mixto es aún mayor entre los más jóvenes: un 78% de los encuestados entre 18 y 30 años se declaró a favor de introducir participación privada en salud y educación, un dato que refleja hasta qué punto la crisis ha erosionado la confianza en la capacidad del Estado para sostener por sí solo los servicios básicos.</p>
+                    <p class="text-xs text-gray-400 mt-6 italic">Con información del Observatorio Cubano de Derechos Humanos (OCDH).</p>
                 `,
-                commentsCount: 56
+                commentsCount: 112
+            },
+            {
+                id: 7,
+                title: "\"Un pan al día\": el testimonio que retrata la escasez de alimentos en Cuba",
+                category: "Sociedad",
+                date: "9 Sep 2026",
+                readTime: "3 min",
+                author: "Periodismo Ciudadano",
+                image: "https://images.unsplash.com/photo-1780644804493-6ac6238e7ecf?auto=format&fit=crop&w=800&q=80",
+                summary: "Una joven cubana mostró en redes sociales su desayuno diario: un pan racionado, aceite y agua endulzada, reflejo de las limitaciones que enfrentan miles de familias ante el desabastecimiento.",
+                content: `
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300">Un video compartido en redes sociales por una joven identificada como Sheyla volvió a poner en primer plano la escasez que enfrentan a diario las familias cubanas. En la grabación, la joven explica que por la bodega, el sistema estatal de distribución subsidiada, cada persona tiene derecho a un único pan diario, sin posibilidad de comprar más aunque se disponga del dinero.</p>
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300 mt-4">Su desayuno, según relató, se limita habitualmente a ese pan, acompañado de aceite, azúcar y agua endulzada. Testimonios similares se repiten en distintas provincias, donde la falta de productos en bodegas y mercados obliga a muchas familias a reducir porciones y sustituir ingredientes según lo que logran conseguir cada semana.</p>
+                    <h4 class="font-bold text-lg text-slate-900 dark:text-white mt-6">Una crisis que se extiende a medicamentos e higiene</h4>
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300 mt-2">Las limitaciones no se detienen en los alimentos: también alcanzan a medicamentos y artículos de aseo personal, lo que obliga a quienes padecen enfermedades crónicas a buscar tratamientos en el mercado informal, pedir ayuda a familiares en el exterior o esperar reposiciones que no siempre llegan a tiempo.</p>
+                    <p class="text-xs text-gray-400 mt-6 italic">Con información de prensa cubana independiente.</p>
+                `,
+                commentsCount: 58
             }
         ];
 
-        // Demo-only seed data, shown ONLY while DENUNCIAS_ENDPOINT is not configured,
-        // so the page still looks alive while you set up the backend.
+        // Demo Seed Data
         const DEMO_SEED_DENUNCIAS = [
             {
                 id: 101,
@@ -825,10 +887,8 @@
             }
         ];
 
-        // Live state: holds only VERIFIED & PUBLISHED reports coming from the backend
         let liveDenuncias = BACKEND_CONFIGURED ? [] : DEMO_SEED_DENUNCIAS;
 
-        // Initialize on DOM Ready
         window.addEventListener('DOMContentLoaded', () => {
             renderNewsGrid(articles);
             renderCitizenFeed();
@@ -845,12 +905,6 @@
             }
         });
 
-        // ============================================================
-        // BACKEND INTEGRATION (Google Apps Script via JSONP)
-        // ============================================================
-        // JSONP is used instead of fetch() because Apps Script Web Apps
-        // don't return CORS headers on GET; loading it as a <script> tag
-        // sidesteps that entirely and works from any host.
         function fetchPublishedDenuncias() {
             if (!BACKEND_CONFIGURED) return;
 
@@ -867,7 +921,6 @@
             document.body.appendChild(script);
         }
 
-        // Called by the JSONP response coming back from Apps Script
         function receivePublishedDenuncias(data) {
             if (!Array.isArray(data)) return;
 
@@ -877,7 +930,6 @@
             renderCitizenFeed();
             renderHomeCitizenFeed();
 
-            // Re-apply province filter if the map tab is showing one
             const provHeader = document.getElementById('selectedProvinceName');
             if (provHeader && !provHeader.innerText.includes('Selecciona')) {
                 const currentProv = provHeader.innerText.replace('Afectaciones en ', '');
@@ -889,18 +941,14 @@
             }
         }
 
-        // Navigation Controller
         function navigateTo(pageId) {
-            // Hide all pages
             document.querySelectorAll('.page-section').forEach(sec => sec.classList.add('hidden'));
             
-            // Show requested page
             const targetPage = document.getElementById(`page-${pageId}`);
             if (targetPage) {
                 targetPage.classList.remove('hidden');
             }
 
-            // Update Navigation Button Active Styles
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 if (btn.getAttribute('data-target') === pageId) {
                     btn.classList.add('text-red-600', 'dark:text-red-400', 'border-b-2', 'border-red-600');
@@ -909,11 +957,9 @@
                 }
             });
 
-            // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Dark Mode Toggle
         function toggleDarkMode() {
             const html = document.documentElement;
             const themeIcon = document.getElementById('themeIcon');
@@ -930,13 +976,11 @@
             }
         }
 
-        // Mobile Menu Drawer Toggle
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
             menu.classList.toggle('hidden');
         }
 
-        // Render Main News Grid
         function renderNewsGrid(data) {
             const container = document.getElementById('newsGrid');
             const allContainer = document.getElementById('allNewsGrid');
@@ -974,7 +1018,6 @@
             if (allContainer) allContainer.innerHTML = cardsHtml;
         }
 
-        // Filter News by Category
         function filterNews(cat) {
             document.querySelectorAll('.cat-btn').forEach(btn => {
                 if (btn.innerText.toLowerCase().includes(cat.toLowerCase()) || (cat === 'all' && btn.innerText.includes('Todas'))) {
@@ -992,7 +1035,6 @@
             }
         }
 
-        // Live Search Bar Handler
         function handleSearch(query) {
             if (!query.trim()) {
                 renderNewsGrid(articles);
@@ -1003,7 +1045,6 @@
             renderNewsGrid(filtered);
         }
 
-        // Render Citizen Reports Feed (Denuncias Tab)
         function renderCitizenFeed() {
             const feedContainer = document.getElementById('denunciasLiveFeed');
             const countBadge = document.getElementById('denunciaCountBadge');
@@ -1042,7 +1083,6 @@
             }
         }
 
-        // Render Top 3 Citizen Reports for Homepage
         function renderHomeCitizenFeed() {
             const container = document.getElementById('homeCitizenFeed');
             if (container) {
@@ -1060,21 +1100,15 @@
             }
         }
 
-        // Submit New Denuncia Form Action
         function handleDenunciaSubmit(e) {
             const form = document.getElementById('denunciaForm');
 
             if (!BACKEND_CONFIGURED) {
-                // Demo mode: no backend configured yet, don't actually submit anywhere.
                 e.preventDefault();
                 showToast("Modo demostración: configura DENUNCIAS_ENDPOINT para enviar denuncias reales.", "info");
                 return;
             }
 
-            // Real mode: let the browser submit the native <form> POST to
-            // the hidden iframe pointed at the Apps Script Web App. This is
-            // a genuine cross-origin form submission, not fetch(), so no
-            // CORS restrictions apply. We do NOT preventDefault() here.
             form.action = DENUNCIAS_ENDPOINT;
 
             const submitBtn = document.getElementById('denunciaSubmitBtn');
@@ -1087,13 +1121,10 @@
                 submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i><span>Enviar Denuncia para Revisión</span>';
                 form.reset();
                 showToast("¡Denuncia enviada! Será revisada por nuestro equipo antes de publicarse.", "success");
-                iframe.onload = null; // avoid firing again on unrelated reloads
+                iframe.onload = null;
             };
-
-            // Let the native form submission proceed (no e.preventDefault()).
         }
 
-        // Load Province Specific Data for Interactive Map
         function loadProvinceData(provName) {
             const nameHeader = document.getElementById('selectedProvinceName');
             const feedContainer = document.getElementById('provinceDetailFeed');
@@ -1122,7 +1153,6 @@
             }
         }
 
-        // Article Modal Opener
         function openArticleModal(articleId) {
             const art = articles.find(a => a.id === articleId);
             if (!art) return;
@@ -1146,7 +1176,6 @@
                         ${art.content}
                     </div>
 
-                    <!-- Article Share Bar -->
                     <div class="flex items-center justify-between border-t border-b border-gray-200 dark:border-slate-700 py-3 mt-6">
                         <span class="text-xs font-bold uppercase text-gray-500">Compartir noticia:</span>
                         <div class="flex space-x-2">
@@ -1156,7 +1185,6 @@
                         </div>
                     </div>
 
-                    <!-- Mock Comments Section -->
                     <div class="pt-4 space-y-4">
                         <h3 class="font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2">
                             <i class="fa-regular fa-comments text-red-600"></i> Comentarios de Lectores (${art.commentsCount})
@@ -1190,7 +1218,6 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Lightbox Gallery Functions
         function openLightbox(imgSrc, caption) {
             document.getElementById('lightboxImg').src = imgSrc;
             document.getElementById('lightboxCaption').innerText = caption;
@@ -1203,7 +1230,6 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Toast Notification System
         function showToast(message, type = 'info') {
             const container = document.getElementById('toastContainer');
             const toast = document.createElement('div');
@@ -1227,14 +1253,12 @@
             }, 4000);
         }
 
-        // Newsletter Handler
         function handleNewsletterSubmit(e) {
             e.preventDefault();
             showToast("¡Te has suscrito correctamente al boletín informativo!", "success");
             e.target.reset();
         }
 
-        // Helper to copy links
         function copyArticleLink() {
             const tempInput = document.createElement('input');
             tempInput.value = window.location.href;
